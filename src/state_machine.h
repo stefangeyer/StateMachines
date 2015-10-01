@@ -27,16 +27,18 @@ typedef enum {
 } traffic_state;
 
 typedef enum {
+	// yellow to red
+	STOP,
 	// red to red-yellow
 	PREPARE,
 	// yellow-red to green
 	GO,
 	// green to green-blink
 	PREPARE2,
-	// green to yellow
+	// green-blink to yellow
 	CAUTION,
-	// yellow to red
-	STOP
+	// error state in case something goes wrong
+	ERR
 } traffic_event;
 
 // the structure where the current state is stored

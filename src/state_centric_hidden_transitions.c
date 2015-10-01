@@ -7,7 +7,7 @@
 
 #include "state_machine.h"
 
-void traffic_light(traffic_light_data* t_light) {
+void traffic_light1(traffic_light_data* t_light) {
 	switch (t_light->state) {
 	case RED:
 		led_red();
