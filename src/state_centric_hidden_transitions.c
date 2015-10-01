@@ -31,7 +31,7 @@ void traffic_light(traffic_light_data* t_light) {
 		break;
 	case YELLOW_BLINK:
 		led_yellow_blink();
-		t_light->state = RED;
+		t_light->state = YELLOW_BLINK;
 		break;
 	default:
 		t_light->state = YELLOW_BLINK;

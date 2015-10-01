@@ -55,6 +55,7 @@ local.properties
 
 # CDT-specific
 .cproject
+Debug
 
 # JDT-specific (Eclipse Java Development Tools)
 .classpath

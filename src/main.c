@@ -14,9 +14,7 @@
 
 void EXTI0_Config();
 
-system_mode mode = DAY;
-
-void main(void) {
+int main(void) {
 	// Init the STM and its LEDs
 	SystemInit();
 	SystemCoreClockUpdate();
@@ -35,6 +33,8 @@ void main(void) {
 	while (true) {
 		traffic_light(p_t_light);
 	}
+
+	return EXIT_SUCCESS;
 }
 
 void EXTI0_Config(void) {

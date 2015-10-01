@@ -53,10 +53,9 @@ void led_yellow() {
 
 void led_yellow_blink() {
 	led_reset();
-	for (int i = 0; i < 4; i++) {
-		BSP_LED_On(LED_ORANGE);
-		HAL_Delay(500);
-		BSP_LED_Off(LED_ORANGE);
-		HAL_Delay(500);
-	}
+
+	BSP_LED_On(LED_ORANGE);
+	HAL_Delay(500);
+	BSP_LED_Off(LED_ORANGE);
+	HAL_Delay(500);
 }

@@ -16,6 +16,7 @@
 #include "led_functions.h"
 
 // the enumeration for the different traffic light states
+// states should be self explaining
 typedef enum {
 	RED,
 	RED_YELLOW,
@@ -26,13 +27,22 @@ typedef enum {
 } traffic_state;
 
 typedef enum {
-	DAY,
-	NIGHT
-} system_mode;
+	// red to red-yellow
+	PREPARE,
+	// yellow-red to green
+	GO,
+	// green to green-blink
+	PREPARE2,
+	// green to yellow
+	CAUTION,
+	// yellow to red
+	STOP
+} traffic_event;
 
 // the structure where the current state is stored
 typedef struct {
 	traffic_state state;
+	traffic_event event;
 } traffic_light_data;
 
 void traffic_light(traffic_light_data* t_light);
