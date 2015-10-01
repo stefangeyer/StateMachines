@@ -14,7 +14,7 @@
 
 void EXTI0_Config();
 
-int main(void) {
+int main1(void) {
 	// Init the STM and its LEDs
 	SystemInit();
 	SystemCoreClockUpdate();
