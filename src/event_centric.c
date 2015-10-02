@@ -43,9 +43,14 @@ void traffic_light(traffic_light_data* t_light) {
 		break;
 	case PREPARE2:
 		if (t_light->state == GREEN_BLINK) {
-			led_green_blink();
-			t_light->event = CAUTION;
-			t_light->state = YELLOW;
+			if (t_light->blink_counter >= 4) {
+				t_light->event = CAUTION;
+				t_light->state = YELLOW;
+				t_light->blink_counter = 0;
+			} else {
+				led_green_blink();
+				t_light->blink_counter += 1;
+			}
 		} else {
 			led_reset();
 			t_light->event = ERR;
@@ -63,7 +68,8 @@ void traffic_light(traffic_light_data* t_light) {
 		t_light->state = YELLOW_BLINK;
 		break;
 	default:
-		t_light->state = YELLOW_BLINK;
+		t_light->event = STOP;
+		t_light->state = RED;
 		break;
 	}
 }

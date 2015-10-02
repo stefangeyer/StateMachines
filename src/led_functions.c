@@ -37,12 +37,11 @@ void led_green() {
 
 void led_green_blink() {
 	led_reset();
-	for (int i = 0; i < 4; i++) {
-		BSP_LED_On(LED_GREEN_2);
-		HAL_Delay(500);
-		BSP_LED_Off(LED_GREEN_2);
-		HAL_Delay(500);
-	}
+
+	BSP_LED_On(LED_GREEN_2);
+	HAL_Delay(500);
+	BSP_LED_Off(LED_GREEN_2);
+	HAL_Delay(500);
 }
 
 void led_yellow() {

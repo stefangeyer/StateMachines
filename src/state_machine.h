@@ -45,6 +45,8 @@ typedef enum {
 typedef struct {
 	traffic_state state;
 	traffic_event event;
+	int blink_counter;
+	bool interrupted;
 } traffic_light_data;
 
 void traffic_light(traffic_light_data* t_light);

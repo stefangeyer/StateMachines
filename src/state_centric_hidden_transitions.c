@@ -7,7 +7,7 @@
 
 #include "state_machine.h"
 
-void traffic_light1(traffic_light_data* t_light) {
+void traffic_light2(traffic_light_data* t_light) {
 	switch (t_light->state) {
 	case RED:
 		led_red();
@@ -22,8 +22,13 @@ void traffic_light1(traffic_light_data* t_light) {
 		t_light->state = GREEN_BLINK;
 		break;
 	case GREEN_BLINK:
-		led_green_blink();
-		t_light->state = YELLOW;
+		if (t_light->blink_counter >= 4) {
+			t_light->state = YELLOW;
+			t_light->blink_counter = 0;
+		} else {
+			led_green_blink();
+			t_light->blink_counter += 1;
+		}
 		break;
 	case YELLOW:
 		led_yellow();
@@ -34,7 +39,7 @@ void traffic_light1(traffic_light_data* t_light) {
 		t_light->state = YELLOW_BLINK;
 		break;
 	default:
-		t_light->state = YELLOW_BLINK;
+		t_light->state = RED;
 		break;
 	}
 }
