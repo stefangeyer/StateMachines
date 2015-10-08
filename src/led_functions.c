@@ -10,6 +10,8 @@
 
 #include "led_functions.h"
 
+int delay = 0;
+
 void led_reset() {
 	BSP_LED_Off(LED_RED);
 	BSP_LED_Off(LED_ORANGE);
@@ -19,20 +21,20 @@ void led_reset() {
 void led_red() {
 	led_reset();
 	BSP_LED_On(LED_RED);
-	HAL_Delay(2000);
+	set_delay(2000);
 }
 
 void led_red_yellow() {
 	led_reset();
 	BSP_LED_On(LED_RED);
 	BSP_LED_On(LED_ORANGE);
-	HAL_Delay(2000);
+	set_delay(2000);
 }
 
 void led_green() {
 	led_reset();
 	BSP_LED_On(LED_GREEN_2);
-	HAL_Delay(2000);
+	set_delay(2000);
 }
 
 void led_green_blink() {
@@ -41,13 +43,13 @@ void led_green_blink() {
 	BSP_LED_On(LED_GREEN_2);
 	HAL_Delay(500);
 	BSP_LED_Off(LED_GREEN_2);
-	HAL_Delay(500);
+	set_delay(500);
 }
 
 void led_yellow() {
 	led_reset();
 	BSP_LED_On(LED_ORANGE);
-	HAL_Delay(2000);
+	set_delay(2000);
 }
 
 void led_yellow_blink() {
@@ -57,4 +59,12 @@ void led_yellow_blink() {
 	HAL_Delay(500);
 	BSP_LED_Off(LED_ORANGE);
 	HAL_Delay(500);
+}
+
+void set_delay(int d) {
+	delay = d;
+}
+
+int get_delay() {
+	return delay;
 }

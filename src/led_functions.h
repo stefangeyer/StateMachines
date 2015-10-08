@@ -17,4 +17,7 @@ void led_green_blink();
 void led_yellow();
 void led_yellow_blink();
 
+void set_delay(int delay);
+int get_delay();
+
 #endif /* LED_FUNCTIONS_H_ */
