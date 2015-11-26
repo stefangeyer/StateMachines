@@ -1,29 +1,26 @@
 /**
  ******************************************************************************
- * @file    main.c
- * @author  sgeyer
- * @version 20150926.1
- * @date    2015/09/26
+ * @file		main.c
+ * @author		Stefan Geyer
+ * @version		1.0
+ * @date		20151126
+ * @brief		Main function to call the state machines
+ *
+ * This file calls the state machine if defined.
+ * In this exercise, the code will be executed in a infinite loop
+ *
+ * @bug		No known bugs.
  ******************************************************************************
  */
 
 #include "stm32f3xx.h"
 #include "stm32f3_discovery.h"
-
-#include "state_machine.h"
+#include "state.h"
 
 void EXTI0_Config();
-void HAL_GPIO_EXTI_Callback(uint16_t);
-void HAL_SYSTICK_Callback(void);
-
-void mode_change(void);
-
-traffic_light_data t_light;
-traffic_light_data* p_t_light = &t_light;
-
+trafficlight_data t_light;
+trafficlight_data* p_t_light;
 int main(void) {
-	// Init the STM and its LEDs
-	HAL_Init();
 	SystemInit();
 	SystemCoreClockUpdate();
 
@@ -34,14 +31,18 @@ int main(void) {
 	BSP_LED_Init(LED_GREEN_2);
 
 	EXTI0_Config();
+	p_t_light = &t_light;
 
-	while (true)
-	{
-	}
+	// setting default states
+	p_t_light->event = STOP;
+	p_t_light->state = RED;
+	p_t_light->blink_counter = 0;
+	p_t_light->night = false;
 
 	return EXIT_SUCCESS;
 }
 
+// configure interrupts
 void EXTI0_Config(void) {
 	GPIO_InitTypeDef GPIO_InitStructure;
 
@@ -60,37 +61,28 @@ void EXTI0_Config(void) {
 	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
-/**
- * @brief EXTI line detection callbacks
- * @param GPIO_Pin: Specifies the pins connected EXTI line
- * @retval None
- */
+// interrupt callback
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	// gets called when user button is pressed
 	if (GPIO_Pin == USER_BUTTON_PIN) {
 		t_light.interrupted = true;
-	}
-}
-
-void HAL_SYSTICK_Callback(void)
-{
-	if (get_delay() <= 0) {
-		mode_change();
-		traffic_light(p_t_light);
-	}
-
-	set_delay(get_delay() - 1);
-}
-
-void mode_change(void) {
-	if (t_light.interrupted && (t_light.state == RED || t_light.state == YELLOW_BLINK)) {
-		if (t_light.state == YELLOW_BLINK) {
-			t_light.state = RED;
-			t_light.event = STOP;
-		} else {
-			t_light.state = YELLOW_BLINK;
-			t_light.event = ERR;
+		if (t_light.interrupted) {
+			// if night state is active, switch back to normal states
+			if (t_light.state == YELLOW_BLINKING && p_t_light->night == true) {
+				p_t_light->night = false;
+				p_t_light->state = RED;
+				p_t_light->event = STOP;
+			} else {
+				// activate night state
+				p_t_light->night = true;
+			}
+			t_light.interrupted = false;
 		}
-
-		t_light.interrupted = false;
 	}
 }
+
+// this function is called every millisecond
+void HAL_SYSTICK_Callback(void) {
+	trafficlight(p_t_light);
+}
+

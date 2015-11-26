@@ -13,7 +13,6 @@
 #include "stm32f3xx.h"
 #include "stm32f3xx_it.h"
 #include "stm32f3_discovery.h"
-
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -39,3 +38,4 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void) {
 	HAL_GPIO_EXTI_IRQHandler(USER_BUTTON_PIN);
 }
+
