@@ -1,8 +1,16 @@
-/*
- * event_centric.c
+/**
+ ******************************************************************************
+ * @file		event_centric.c
+ * @author		Stefan Geyer
+ * @version		1.0
+ * @date		20151126
+ * @brief		Event centric state machine
  *
- *  Created on: 01. Okt. 2015
- *      Author: Stefan
+ * An event based implementation of the traffic_light
+ * This can be used if there are a lot of events but less states.
+ *
+ * @bug		No known bugs.
+ ******************************************************************************
  */
 
 #include "state_machine.h"

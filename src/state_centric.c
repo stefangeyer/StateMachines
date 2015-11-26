@@ -1,8 +1,16 @@
-/*
- * state_centric.c
+/**
+ ******************************************************************************
+ * @file		state_centric.c
+ * @author		Stefan Geyer
+ * @version		1.0
+ * @date		20151126
+ * @brief		State centric state machine
  *
- *  Created on: 01. Okt. 2015
- *      Author: Stefan
+ * An state based implementation of the traffic_light
+ * This can be used if there are a lot of states but less events.
+ *
+ * @bug		No known bugs.
+ ******************************************************************************
  */
 
 #include "state_machine.h"

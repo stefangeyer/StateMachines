@@ -1,8 +1,13 @@
-/*
- * state_machine.h
+/**
+ ******************************************************************************
+ * @file		state_machine.h
+ * @author		Stefan Geyer
+ * @version		1.0
+ * @date		20151126
+ * @brief		Includes related libs, defines prototypes and enums.
  *
- *  Created on: 26. Sep. 2015
- *      Author: Stefan
+ * @bug		No known bugs.
+ ******************************************************************************
  */
 
 #ifndef STATE_MACHINE
@@ -26,22 +31,31 @@ typedef enum {
 	YELLOW_BLINK
 } traffic_state;
 
+/**
+ * @brief		This enum defines the available events
+ *
+ * The different events
+ */
 typedef enum {
 	// yellow to red
-	STOP,
+	STOP,											/**< Event for RED*/
 	// red to red-yellow
-	PREPARE,
+	PREPARE,										/**< Event for RED-YELLOW*/
 	// yellow-red to green
-	GO,
+	GO,												/**< Event for GREEN*/
 	// green to green-blink
-	PREPARE2,
+	PREPARE2,										/**< Event for GREEN-BLINK*/
 	// green-blink to yellow
-	CAUTION,
+	CAUTION,										/**< Event for YELLOW*/
 	// error state in case something goes wrong
-	ERR
+	ERR												/**< Event for YELLOW-BLINK*/
 } traffic_event;
 
-// the structure where the current state is stored
+/**
+ * @brief		This struct contains all the data that is used within the execution
+ *
+ * This struct contains the event, state, blink_counter and interruped
+ */
 typedef struct {
 	traffic_state state;
 	traffic_event event;
@@ -49,6 +63,14 @@ typedef struct {
 	bool interrupted;
 } traffic_light_data;
 
+/**
+ * @brief Computes the next traffic_light state.
+ *
+ * There are several implementations for this method
+ *
+ * @param t_light The struct that contains the data
+ * @retval void None
+ */
 void traffic_light(traffic_light_data* t_light);
 
 #endif /* STATE_MACHINE */

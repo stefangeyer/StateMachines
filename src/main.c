@@ -1,9 +1,15 @@
 /**
  ******************************************************************************
- * @file    main.c
- * @author  sgeyer
- * @version 20150926.1
- * @date    2015/09/26
+ * @file		main.c
+ * @author		Stefan Geyer
+ * @version		1.0
+ * @date		20151126
+ * @brief		Main function to call the state machines
+ *
+ * This file calls the state machine if defined.
+ * In this exercise, the code will be executed in a infinite loop
+ *
+ * @bug		No known bugs.
  ******************************************************************************
  */
 

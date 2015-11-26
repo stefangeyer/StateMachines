@@ -1,8 +1,18 @@
-/*
- * state_centric.c
+/**
+ ******************************************************************************
+ * @file		state_centric_hidden_transitions.c
+ * @author		Stefan Geyer
+ * @version		1.0
+ * @date		20151126
+ * @brief		Sttate centric without event check
  *
- *  Created on: 26. Sep. 2015
- *      Author: Stefan
+ * An state based implementation of the traffic_light
+ * This can be used if there are a lot of states but less events.
+ * In the normal state centic state machine, there would be an
+ * extra check for the related events. This step is skipped here.
+ *
+ * @bug		No known bugs.
+ ******************************************************************************
  */
 
 #include "state_machine.h"

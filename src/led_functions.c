@@ -1,8 +1,16 @@
-/*
- * led_functions.c
+/**
+ ******************************************************************************
+ * @file		led_functions.c
+ * @author		Stefan Geyer
+ * @version		1.0
+ * @date		20151126
+ * @brief		The functions that change the state of the leds
  *
- *  Created on: 26. Sep. 2015
- *      Author: Stefan
+ * Multiple functions were defined to change the led state. One resets all leds,
+ * the other set a specific state.
+ *
+ * @bug		No known bugs.
+ ******************************************************************************
  */
 
 #include "stm32f3xx.h"
