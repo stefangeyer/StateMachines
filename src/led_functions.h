@@ -13,8 +13,10 @@ void led_reset();
 void led_red();
 void led_red_yellow();
 void led_green();
+void led_green_toggle();
 void led_green_blink();
 void led_yellow();
+void led_yellow_toggle();
 void led_yellow_blink();
 
 void set_delay(int delay);

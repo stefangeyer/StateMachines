@@ -7,7 +7,7 @@
 
 #include "state_machine.h"
 
-void traffic_light1(traffic_light_data* t_light) {
+void traffic_light(traffic_light_data* t_light) {
 	// the event changes after the led delay ran out.
 	// you can check the led delays in the led_functions.c file
 	switch (t_light->state) {
@@ -34,12 +34,12 @@ void traffic_light1(traffic_light_data* t_light) {
 		break;
 	case GREEN_BLINK:
 		if (t_light->event == PREPARE2) {
-			if (t_light->blink_counter >= 4) {
+			if (t_light->blink_counter >= 8) {
 				t_light->event = CAUTION;
 				t_light->state = YELLOW;
 				t_light->blink_counter = 0;
 			} else {
-				led_green_blink();
+				led_green_toggle();
 				t_light->blink_counter += 1;
 			}
 		}

@@ -37,6 +37,13 @@ void led_green() {
 	set_delay(2000);
 }
 
+void led_green_toggle() {
+	led_reset();
+
+	BSP_LED_Toggle(LED_GREEN_2);
+	set_delay(500);
+}
+
 void led_green_blink() {
 	led_reset();
 
@@ -52,13 +59,19 @@ void led_yellow() {
 	set_delay(2000);
 }
 
+void led_yellow_toggle() {
+	led_reset();
+
+	BSP_LED_Toggle(LED_ORANGE);
+}
+
 void led_yellow_blink() {
 	led_reset();
 
 	BSP_LED_On(LED_ORANGE);
 	HAL_Delay(500);
 	BSP_LED_Off(LED_ORANGE);
-	HAL_Delay(500);
+	set_delay(500);
 }
 
 void set_delay(int d) {

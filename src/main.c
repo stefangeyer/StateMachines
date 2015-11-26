@@ -16,7 +16,7 @@ void EXTI0_Config();
 void HAL_GPIO_EXTI_Callback(uint16_t);
 void HAL_SYSTICK_Callback(void);
 
-void check_for_mode_change(void);
+void mode_change(void);
 
 traffic_light_data t_light;
 traffic_light_data* p_t_light = &t_light;
@@ -24,6 +24,7 @@ traffic_light_data* p_t_light = &t_light;
 int main(void) {
 	// Init the STM and its LEDs
 	HAL_Init();
+	SystemInit();
 	SystemCoreClockUpdate();
 
 	SysTick_Config(SystemCoreClock / 1000);
@@ -40,20 +41,6 @@ int main(void) {
 
 	return EXIT_SUCCESS;
 }
-
-/*void check_for_mode_change() {
-	if (t_light.interrupted && (t_light.state == RED || t_light.state == YELLOW_BLINK)) {
-		if (t_light.state == YELLOW_BLINK) {
-			t_light.state = RED;
-			t_light.event = STOP;
-		} else {
-			t_light.state = YELLOW_BLINK;
-			t_light.event = ERR;
-		}
-
-		t_light.interrupted = false;
-	}
-}*/
 
 void EXTI0_Config(void) {
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -86,15 +73,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 void HAL_SYSTICK_Callback(void)
 {
-	if (get_delay() == 0) {
-		check_for_mode_change();
+	if (get_delay() <= 0) {
+		mode_change();
 		traffic_light(p_t_light);
 	}
 
 	set_delay(get_delay() - 1);
 }
 
-void check_for_mode_change(void) {
+void mode_change(void) {
 	if (t_light.interrupted && (t_light.state == RED || t_light.state == YELLOW_BLINK)) {
 		if (t_light.state == YELLOW_BLINK) {
 			t_light.state = RED;
@@ -107,4 +94,3 @@ void check_for_mode_change(void) {
 		t_light.interrupted = false;
 	}
 }
-

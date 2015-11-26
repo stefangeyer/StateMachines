@@ -7,7 +7,7 @@
 
 #include "state_machine.h"
 
-void traffic_light(traffic_light_data* t_light) {
+void traffic_light1(traffic_light_data* t_light) {
 	// the event changes after the led delay ran out.
 	// you can check the led delays in the led_functions.c file
 	switch (t_light->event) {
